@@ -4,6 +4,8 @@ project(cquiz VERSION 0.1.0 LANGUAGES C)
 set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc")
 set(ROOT_RELATIVE_PATH "../..")
 
+include_directories(${ROOT_RELATIVE_PATH}/src)
+
 set(CONFIG_FILE "config.cmake")
 if(EXISTS ${CMAKE_SOURCE_DIR}/${CONFIG_FILE})
     include(${CMAKE_SOURCE_DIR}/${CONFIG_FILE})
