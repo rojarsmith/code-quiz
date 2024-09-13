@@ -5,6 +5,7 @@
 
 int func1(int);
 int func2(int, int);
+int func2(int, int);
 
 int main(int argc, char *argv[])
 {
@@ -50,6 +51,39 @@ int main(int argc, char *argv[])
     int a7 = (*(typeof(func2) *)fptr2)(a1, a2);
     PRINTLN("a6 = %i", a6);
     PRINTLN("a7 = %i", a7);
+
+    int *a8[10] = {NULL};
+    a8[5] = (int *)malloc(sizeof(int));
+    *a8[5] = 11;
+    PRINTLN("*a8[5] = %i", *a8[5]);
+    if (a8[4] == NULL)
+    {
+        PRINTLN("*a8[4] = NULL");
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        if (a8[i] != NULL)
+        {
+            free(a8[i]);
+            a8[i] = NULL;
+        }
+    }
+
+    int a9[4] = {1, 2, 3, 4};
+    int(*a10)[4] = &a9;
+    PRINTLN("*a10[3] = %i", (*a10)[3]);
+
+    int (*a11[4])(int, int) = {NULL};
+    a11[3] = &func2;
+    PRINTLN("(*a11[3])(a1, a2) = %i", (*a11[3])(a1, a2));
+
+    int a12[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int(*a13)[2];
+    a13 = &a12[0];
+    PRINTLN("(*a13)[1] = %i", (*a13)[1]);
+    a13++;
+    PRINTLN("(*a13)[1] = %i", (*a13)[1]);
 
     return 0;
 }
